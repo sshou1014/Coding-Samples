@@ -1,0 +1,117 @@
+/*
+ *Player blueprint
+ * 
+ * Hansheng Shou, sshou@bu.edu
+ */
+import java.util.*;
+
+public class Player {
+    private String name;
+    private int numCards;
+    private Card[] hand;
+    private int handCount;
+    
+    /*Constructor
+     */
+    public Player (String name) {
+        this.name=name;
+        this.hand= new Card[Blackjack.MAX_CARDS_PER_PLAYER];
+        handCount=0;
+    }
+    
+    /*getName- returns the name of the player as a string
+     */
+    public String getName() {
+        return this.name;
+    }
+    
+    /*getNumCards- returns the number of cards in a player's hand
+     */
+    public int getNumCards() {
+        return this.handCount;
+    }
+    
+    /*addCard- takes a Card object and adds it to the specified player's hand
+     */
+    public void addCard (Card i) {
+        if (i == null || this.hand.length == 5) {
+            throw new IllegalArgumentException();
+        }
+        this.hand[this.handCount] = i;
+        this.handCount++;
+    }
+    
+    /*getCard- takes an int parameter and returns the specified object at the index
+     */
+    public Card getCard (int j) {
+        if (this.hand[j] == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        return this.hand[j];
+        
+    }
+    
+    /*getHandValue- computes and returns the total value of the player's current hand
+     */
+    public int getHandValue () {
+        int sum = 0;
+        boolean ace = false;
+        for (int i = 0; i < this.handCount; i++) {
+            if(this.hand[i].getValue() == 1)
+            {
+                ace = true;
+            }
+            sum += this.hand[i].getValue();
+        }
+        if(sum <= 11 && ace) {
+            sum += 10;
+        }
+        return sum;
+    }
+    
+    /*printHand- prints the current contents of the player's hand
+     */
+    public void printHand () {
+        if(this.handCount >= 0) {
+            for (int i = 0; i < handCount; i++) {
+                System.out.print(this.hand[i].toString() + "  ");
+            }
+            System.out.print ("(value = " + getHandValue() + ")");
+        }
+    }
+    
+    /*hasBlackjack- returns true if player has blackjack
+     */
+    
+    public boolean hasBlackjack () {
+        if (getHandValue() == 21 && this.handCount==2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /*wantsHit- returns true if player wants a hit and false if not
+     */
+    public boolean wantsHit (Scanner input, Player opponent) {
+        System.out.print ("Want another hit, " + this.name + " (y/n)?");
+        String choice = input.nextLine();
+        
+        if (choice.equalsIgnoreCase("y")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /*discardCards- wipes all of the cards in the player's hands
+     */
+    public void discardCards () {
+        for (int i=0; i<hand.length; i++) {
+            hand[i] = null;
+        }
+        
+        this.handCount=0;
+    }
+}
