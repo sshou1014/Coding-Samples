@@ -1,0 +1,56 @@
+/**
+ * 
+ * AreaCalculator.java
+ * Computer Science 111, Boston University
+ * 
+ * base code provided by the course staff
+ * 
+ * algorithm implemented by: Hansheng Shou- sshou@bu.edu
+ * 
+ * This program computes the area of a circular plot of land
+ * and displays it in different units.
+ */
+
+import java.util.*;
+
+public class AreaCalculator {
+    public static void main(String[] args) {
+        int diameter;      // the diameter of the plot in feet
+        
+        // Read the values from the user.
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Input the diameter, measured to the nearest foot: ");
+        diameter = scan.nextInt();
+        
+        
+        /*
+         * The lines above read the diameter from the user
+         * and store it in the variable diameter.
+         * Fill in the rest of the program below, using that variable
+         * to compute and print the area in the specified formats.
+         */
+        
+        //The lines below give the area in square feet of the diameter as an integer
+        int radius= diameter/2;
+        double AreaSquareFeet= (int)(Math.PI*radius*radius);
+        int AreaSquareFeetInt= (int)AreaSquareFeet;  //Since we cannot typecast in println statements, I created this
+        System.out.println(AreaSquareFeetInt + " square feet");
+        
+       
+        //The lines below divides area square feet by 9 and gives the output in a double
+        double AreaSquareYards= AreaSquareFeet/9;
+        System.out.println(AreaSquareYards + " square yards");
+        
+        
+        //The lines below turns the area in square yards into an integer
+        int AreaSquareYardsInt= (int)AreaSquareYards; //Same reason as above
+        System.out.print(AreaSquareYardsInt + " square yards and ");
+        
+        
+        //The lines below turns the decimal part of area in square yards into an integer in square feet
+        double AreaSquareYardsDecimal= AreaSquareYards*10%10; //Turns the decimal values into a single integer
+        int AreaSquareYardsDecimalInt= (int)AreaSquareYardsDecimal; //Same reason as above
+        System.out.println(AreaSquareYardsDecimalInt + " square feet");
+        
+    }
+}
