@@ -1,0 +1,62 @@
+/*
+ * Dealer.java
+ * 
+ * Hansheng Shou, sshou@bu.edu
+ */
+
+import java.util.*;
+
+public class Dealer extends Player {
+    private boolean firstCardReveal = false;
+    
+    
+    /*Constructor
+     */
+    public Dealer () {
+        super("Dealer");
+        
+        this.firstCardReveal=firstCardReveal;
+    }
+    
+    /*revealFirstCard- changes the value of the firstCardReveal to true
+     */
+    
+    public void revealFirstCard () {
+        this.firstCardReveal=true;
+    }
+    
+    /*printHand- overrides the inherited version of that method
+     */
+    public void printHand () {
+            for (int i = 0; i < getNumCards(); i++) {
+                if(i == 0 && firstCardReveal==false) {
+                    System.out.print("XX  "); 
+                }
+                else{
+                    System.out.print(getCard(i).toString() + "  ");}
+            }
+        }
+    
+    /*wantsHit- overrides the method, determines if the dealer should be given another hit
+     */
+    public boolean wantsHit (Scanner input, Player player) {
+        if (getHandValue()<17) {
+            return true;
+        }
+        else if (player.getHandValue() ==21) {
+            return true;
+        }
+        else if (player.getHandValue()>getHandValue()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /*discardCards- wipes all of the cards in the dealer's hands
+     */
+    public void discardCards () {
+        super.discardCards();
+        this.firstCardReveal=false;
+    }
+}
