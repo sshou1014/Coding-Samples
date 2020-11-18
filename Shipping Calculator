@@ -1,0 +1,112 @@
+/*
+ * Hansheng Shou
+ * sshou@bu.edu
+ * 
+ * This program calculates the shipping charge for a single item purchased.
+ * 
+ */
+
+import java.util.*;
+
+public class ShippingCalculator {
+    
+    
+    /*getChoice- uses the Scanner to determine
+     * the user's shipping choice.
+     */
+    public static int getChoice(Scanner console) {
+        System.out.println("Available shipping types:");
+        System.out.println("  1) standard");
+        System.out.println("  2) two-Day");
+        System.out.println("  3) one-Day");
+        System.out.println();
+        System.out.println("What type of shipping are you using?");
+        int choice = console.nextInt();
+        return choice;
+    }
+    
+        
+    /*getItem- uses the Scanner to determine
+     * what item the user is purchasing.
+     */
+    public static int getItem(Scanner console) {
+        System.out.println("Possible item types:");
+        System.out.println("  1) gift card");
+        System.out.println("  2) book");
+        System.out.println("  3) clothing");
+        System.out.println("  4) music");
+        System.out.println("  5) toy");
+        System.out.println("  6) electronics");
+        System.out.println();
+        System.out.println("What type of item are you shipping?");
+        int itemChoice = console.nextInt();
+        return itemChoice;
+    }
+    
+    /*getWeight- uses the Scanner to determine the user's
+     * item weight if applicable.
+     */
+    public static int getWeight(Scanner console){
+        System.out.println("Weight of item?");
+        int weightChoice= console.nextInt();
+        return weightChoice;
+    }
+    
+    /*getLocation- uses the Scanner to determine whether the shipment
+     * will need to be shipped to Alaska or Hawaii or not.
+     */
+    public static String getLocation(Scanner console) {
+        System.out.print ("Shipping to Alaska or Hawaii (y/n)?");
+        String location= console.next();
+        return location;
+    }
+    
+    /*baseCharge- determines the shipping base charges depending on the user's
+     * input of which method they chose.
+     */
+    public static double baseCharge(Scanner console){
+        int choice= getChoice(console);
+        
+        if (choice==1) {
+            return 3.99;
+        } else if (choice==2) {
+            return 9.99;
+        } else {
+            return 12.99;
+        }
+    }
+    
+    /*itemChargeStandard- uses the scanner to determine the type and the price
+     * of the item selected.
+     */
+    
+    public static double itemChargeStandard(Scanner console) {
+        int itemChoice= getItem(console);
+        int weightChoice= getWeight(console);
+        
+        double price;
+        if (itemChoice==1) {
+            price=0;
+        } else if (itemChoice==2) {
+            price=0.99;
+        } else if(itemChoice==3) {
+            price=1.99*0.65*(weightChoice);
+            
+        }
+        return price;
+    
+        
+    }
+    
+    
+ public static void main (String[] args){
+        Scanner console= new Scanner(System.in);
+        
+        System.out.println("Welcome to the Shipping Charge Calculator!");
+        System.out.println();
+        
+        int choice= getChoice(console);
+        int itemChoice= getItem(console);
+        
+    }
+}
